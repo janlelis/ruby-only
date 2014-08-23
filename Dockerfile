@@ -1,21 +1,27 @@
+# # #
+# Base Dockerfile for Ruby applications
+# # #
+
 FROM ubuntu:trusty
 ENV DEBIAN_FRONTEND noninteractive
 
+# Ensure Locale
+RUN apt-get -y update
+RUN dpkg-reconfigure locales && \
+    locale-gen en_US.UTF-8 && \
+    /usr/sbin/update-locale LANG=en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+# Packages
+RUN apt-get -y update
+RUN apt-get -y install wget build-essential git
+
 # Set $PATH so that non-login shells will see the Ruby binaries
 ENV PATH $PATH:/opt/rubies/ruby-2.1.2/bin
+RUN apt-get -y update
 
-# Ensure UTF-8 locale
-RUN echo "LANG=\"en_US.UTF-8\"" > /etc/default/locale
-RUN locale-gen en_US.UTF-8
-RUN dpkg-reconfigure locales
-
-RUN apt-get update
-
-# Install dependencies
+# Ruby dependencies
 RUN apt-get install -y \
-  wget \
-  build-essential \
-  libcurl4-openssl-dev \
   libreadline-dev \
   flex \
   bison \
@@ -40,6 +46,9 @@ RUN ruby-install ruby 2.1.2
 # Add Ruby binaries to $PATH
 ADD ./ruby.sh /etc/profile.d/ruby.sh
 RUN chmod a+x /etc/profile.d/ruby.sh
+
+# Never install Ruby docs
+RUN echo "install: --no-rdoc --no-ri\nupdate: --no-rdoc --no-ri" > /etc/gemrc
 
 # Install bundler gem globally
 RUN /bin/bash -l -c 'gem install bundler'
