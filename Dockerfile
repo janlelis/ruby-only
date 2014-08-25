@@ -17,15 +17,7 @@ RUN apt-get -y update
 RUN apt-get -y install wget build-essential git
 
 # Ruby dependencies
-RUN apt-get -y install \
-  libreadline-dev \
-  flex \
-  bison \
-  libxml2-dev \
-  libxslt1-dev \
-  libssl-dev \
-  imagemagick \
-  zlib1g-dev
+RUN apt-get -y install bison flex imagemagick libreadline-dev libssl-dev libxml2-dev libxslt1-dev zlib1g-dev
 
 # Install ruby-install
 RUN cd /tmp &&\

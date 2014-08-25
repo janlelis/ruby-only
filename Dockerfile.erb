@@ -17,28 +17,20 @@ RUN apt-get -y update
 RUN apt-get -y install wget build-essential git
 
 # Ruby dependencies
-RUN apt-get -y install \
-  libreadline-dev \
-  flex \
-  bison \
-  libxml2-dev \
-  libxslt1-dev \
-  libssl-dev \
-  imagemagick \
-  zlib1g-dev
+RUN apt-get -y install <%= packages.sort.join " " %>
 
 # Install ruby-install
 RUN cd /tmp &&\
-  wget -O ruby-install-0.4.3.tar.gz https://github.com/postmodern/ruby-install/archive/v0.4.3.tar.gz &&\
-  tar -xzvf ruby-install-0.4.3.tar.gz &&\
-  cd ruby-install-0.4.3/ &&\
+  wget -O ruby-install-<%= ruby_install_version %>.tar.gz https://github.com/postmodern/ruby-install/archive/v<%= ruby_install_version %>.tar.gz &&\
+  tar -xzvf ruby-install-<%= ruby_install_version %>.tar.gz &&\
+  cd ruby-install-<%= ruby_install_version %>/ &&\
   make install
 
 # Install latest MRI
-RUN ruby-install ruby 2.1.2
+RUN ruby-install ruby <%= ruby_version %>
 
 # Set $PATH so that non-login shells will see the Ruby binaries
-ENV PATH $PATH:/opt/rubies/ruby-2.1.2/bin
+ENV PATH $PATH:/opt/rubies/ruby-<%= ruby_version %>/bin
 
 # Add Ruby binaries to $PATH
 ADD ./ruby.sh /etc/profile.d/ruby.sh
@@ -48,7 +40,7 @@ RUN chmod a+x /etc/profile.d/ruby.sh
 RUN echo "install: --no-rdoc --no-ri\nupdate: --no-rdoc --no-ri" > /etc/gemrc
 
 # Install bundler gem
-RUN /bin/bash -l -c 'gem install bundler'
+RUN /bin/bash -l -c 'gem install <%= gems.sort.join " " %>'
 
 # Cleaning...
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

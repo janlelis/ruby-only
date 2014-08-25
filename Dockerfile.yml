@@ -1,0 +1,14 @@
+ruby_version: 2.1.2
+gems:
+- bundler
+packages:
+- libreadline-dev
+- flex
+- bison
+- libxml2-dev
+- libxslt1-dev
+- libssl-dev
+- imagemagick
+- zlib1g-dev
+ruby_install_version: 0.4.3
+
