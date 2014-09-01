@@ -18,7 +18,9 @@ RUN apt-get -y update
 RUN apt-get -y install wget build-essential git
 
 # Ruby dependencies
-RUN apt-get -y install <%= packages.sort.join " " %>
+% if defined? apt_packages
+RUN apt-get -y install <%= apt_packages.sort.join " " %>
+% end
 
 # Get ruby-install source
 WORKDIR /tmp
@@ -38,7 +40,12 @@ WORKDIR ruby-install-<%= ruby_install_version %>/
 RUN make install
 
 # Install actual Ruby
-RUN ruby-install ruby <%= ruby_version %> -- <%= configure_options.sort.join " " %>
+% if defined? configure_options
+%   normalized_configure_options = " -- " + configure_options.sort.join(" ")
+% else
+%   normalized_configure_options = nil
+% end
+RUN ruby-install ruby <%= ruby_version %><%= normalized_configure_options %>
 
 # Set $PATH so that non-login shells will see the Ruby binaries
 ENV PATH $PATH:/opt/rubies/ruby-<%= ruby_version %>/bin
@@ -50,8 +57,10 @@ RUN chmod a+x /etc/profile.d/ruby.sh
 # Never install Ruby docs
 RUN echo "install: --no-rdoc --no-ri\nupdate: --no-rdoc --no-ri" > /etc/gemrc
 
-# Install bundler gem
-RUN /bin/bash -l -c 'gem install <%= gems.sort.join " " %>'
+# Install global gems
+% if defined? ruby_gems
+RUN /bin/bash -l -c 'gem install <%= ruby_gems.sort.join " " %>'
+% end
 
 # Cleaning...
 RUN apt-get clean

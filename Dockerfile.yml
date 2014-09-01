@@ -1,7 +1,8 @@
 ruby_version: 2.1.2
-gems:
+ruby_install_version: 0.4.3
+ruby_gems:
 - bundler
-packages:
+apt_packages:
 - bison
 - flex
 - libxml2-dev
@@ -12,5 +13,4 @@ packages:
 - zlib1g-dev
 configure_options:
 - --disable-install-doc
-ruby_install_version: 0.4.3
 
