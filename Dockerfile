@@ -3,6 +3,7 @@
 # # #
 
 FROM ubuntu:trusty
+MAINTAINER Jan Lelis <mail@janlelis.de>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Ensure locale
