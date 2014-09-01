@@ -18,7 +18,7 @@ RUN apt-get -y update
 RUN apt-get -y install wget build-essential git
 
 # Ruby dependencies
-RUN apt-get -y install bison flex libmagickwand-dev libreadline-dev libssl-dev libxml2-dev libxslt1-dev zlib1g-dev
+RUN apt-get -y install bison flex libreadline-dev libssl-dev libxml2-dev libxslt1-dev zlib1g-dev
 
 # Get ruby-install source
 WORKDIR /tmp
@@ -38,7 +38,7 @@ WORKDIR ruby-install-0.4.3/
 RUN make install
 
 # Install actual Ruby
-RUN ruby-install ruby 2.1.2
+RUN ruby-install ruby 2.1.2 -- --disable-install-doc
 
 # Set $PATH so that non-login shells will see the Ruby binaries
 ENV PATH $PATH:/opt/rubies/ruby-2.1.2/bin

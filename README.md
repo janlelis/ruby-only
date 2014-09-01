@@ -2,7 +2,6 @@
 
 A Dockerfile that
  * Downloads and builds Ruby via [ruby-install](https://github.com/postmodern/ruby-install)
- * Installs some common Ruby apt dependencies
  * Installs the `bundler` gem
 
 It is meant as a base image and does not start any processes.
