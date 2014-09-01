@@ -1,10 +1,6 @@
-# Ruby Base Dockerfile
+# janlelis/ruby-only
 
-A Dockerfile that
- * Downloads and builds Ruby via [ruby-install](https://github.com/postmodern/ruby-install)
- * Installs the `bundler` gem
-
-It is meant as a base image and does not start any processes.
+A docker base image that installs the latest Ruby via [ruby-install](https://github.com/postmodern/ruby-install).
 
 Based on the [Ruby Dockerfile by Abe Voelker](https://github.com/abevoelker/docker-ruby).
 
