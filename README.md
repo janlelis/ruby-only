@@ -1,18 +1,12 @@
-# Ruby Dockerfile
+# Ruby Base Dockerfile
 
-A Dockerfile that builds:
- * MRI Ruby 2.1.2 + `bundler` gem (system-wide install)
- * Postgres 9.3 client and development headers
- * latest `git` binaries
- * latest `nginx`
- * latest Node.js binaries (for best `execjs` performance)
- * `supervisord` with an nginx config included
- * ImageMagick
+A Dockerfile that
+ * Downloads and builds Ruby via [ruby-install](https://github.com/postmodern/ruby-install)
+ * Installs some common Ruby apt dependencies
+ * Installs the `bundler` gem
 
-A real app's Dockerfile should inherit from this image, add an application
-user, add a source checkout and `bundle install`, add a supervisord config
-for running the application code with puma or unicorn, etc.
+It is meant as a base image and does not start any processes.
 
-## License
+Based on the [Ruby Dockerfile by Abe Voelker](https://github.com/abevoelker/docker-ruby).
 
 MIT license.
