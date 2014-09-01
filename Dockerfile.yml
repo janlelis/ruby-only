@@ -2,13 +2,13 @@ ruby_version: 2.1.2
 gems:
 - bundler
 packages:
-- libreadline-dev
-- flex
 - bison
+- flex
 - libxml2-dev
 - libxslt1-dev
 - libssl-dev
-- imagemagick
+- libmagickwand-dev
+- libreadline-dev
 - zlib1g-dev
 configure_options:
 - --disable-install-doc
