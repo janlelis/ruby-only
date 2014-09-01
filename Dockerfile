@@ -44,7 +44,7 @@ RUN ruby-install ruby 2.1.2 -- --disable-install-doc
 ENV PATH $PATH:/opt/rubies/ruby-2.1.2/bin
 
 # Add Ruby binaries to $PATH
-ADD ./ruby.sh /etc/profile.d/ruby.sh
+RUN echo 'export PATH="$PATH:/opt/rubies/ruby-2.1.2/bin"' > /etc/profile.d/ruby.sh
 RUN chmod a+x /etc/profile.d/ruby.sh
 
 # Never install Ruby docs
