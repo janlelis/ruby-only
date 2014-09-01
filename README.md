@@ -7,3 +7,19 @@ Based on the [Ruby Dockerfile by Abe Voelker](https://github.com/abevoelker/dock
 Still tweaking around.
 
 MIT license.
+
+
+## Usage
+
+This is an example Dockerfile you could use for running an IRB process:
+
+    FROM janlelis/ruby-only
+    CMD ["irb"]
+
+You can build it with:
+
+    docker build -t irb-image .
+
+And then run it with:
+
+    docker run -it irb-image
