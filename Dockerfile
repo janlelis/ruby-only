@@ -55,6 +55,7 @@ RUN echo "gem: --no-document" > /opt/rubies/ruby-2.1.2/etc/gemrc
 RUN /bin/bash -l -c 'gem install bundler'
 
 # Cleaning...
+WORKDIR /
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

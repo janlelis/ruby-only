@@ -65,6 +65,7 @@ RUN /bin/bash -l -c 'gem install <%= ruby_gems.sort.join " " %>'
 % end
 
 # Cleaning...
+WORKDIR /
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
