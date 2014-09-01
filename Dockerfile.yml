@@ -10,5 +10,7 @@ packages:
 - libssl-dev
 - imagemagick
 - zlib1g-dev
+configure_options:
+- --disable-install-doc
 ruby_install_version: 0.4.3
 

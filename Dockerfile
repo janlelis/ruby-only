@@ -38,7 +38,7 @@ WORKDIR ruby-install-0.4.3/
 RUN make install
 
 # Install actual Ruby
-RUN ruby-install ruby 2.1.2
+RUN ruby-install ruby 2.1.2 -- --disable-install-doc
 
 # Set $PATH so that non-login shells will see the Ruby binaries
 ENV PATH $PATH:/opt/rubies/ruby-2.1.2/bin

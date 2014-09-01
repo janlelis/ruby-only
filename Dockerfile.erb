@@ -38,7 +38,7 @@ WORKDIR ruby-install-<%= ruby_install_version %>/
 RUN make install
 
 # Install actual Ruby
-RUN ruby-install ruby <%= ruby_version %>
+RUN ruby-install ruby <%= ruby_version %> -- <%= configure_options.sort.join " " %>
 
 # Set $PATH so that non-login shells will see the Ruby binaries
 ENV PATH $PATH:/opt/rubies/ruby-<%= ruby_version %>/bin
