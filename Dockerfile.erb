@@ -48,14 +48,16 @@ RUN make install
 RUN ruby-install ruby <%= ruby_version %><%= normalized_configure_options %>
 
 # Set $PATH so that non-login shells will see the Ruby binaries
-ENV PATH $PATH:/opt/rubies/ruby-<%= ruby_version %>/bin
+% ruby_base_path = "/opt/rubies/ruby-#{ruby_version}"
+ENV PATH $PATH:<%= ruby_base_path %>/bin
 
 # Add Ruby binaries to $PATH
-RUN echo 'export PATH="$PATH:/opt/rubies/ruby-2.1.2/bin"' > /etc/profile.d/ruby.sh
+RUN echo 'export PATH="$PATH:<%= ruby_base_path %>/bin"' > /etc/profile.d/ruby.sh
 RUN chmod a+x /etc/profile.d/ruby.sh
 
 # Never install Ruby docs
-RUN echo "install: --no-rdoc --no-ri\nupdate: --no-rdoc --no-ri" > /etc/gemrc
+RUN mkdir <%= ruby_base_path %>/etc
+RUN echo "gem: --no-document" > <%= ruby_base_path %>/etc/gemrc
 
 # Install global gems
 % if defined? ruby_gems

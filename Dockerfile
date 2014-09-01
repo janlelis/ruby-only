@@ -48,7 +48,8 @@ RUN echo 'export PATH="$PATH:/opt/rubies/ruby-2.1.2/bin"' > /etc/profile.d/ruby.
 RUN chmod a+x /etc/profile.d/ruby.sh
 
 # Never install Ruby docs
-RUN echo "install: --no-rdoc --no-ri\nupdate: --no-rdoc --no-ri" > /etc/gemrc
+RUN mkdir /opt/rubies/ruby-2.1.2/etc
+RUN echo "gem: --no-document" > /opt/rubies/ruby-2.1.2/etc/gemrc
 
 # Install global gems
 RUN /bin/bash -l -c 'gem install bundler'
