@@ -40,12 +40,13 @@ RUN make install
 # Install actual Ruby
 RUN ruby-install ruby 2.1.2 -- --disable-install-doc
 
-# Set $PATH so that non-login shells will see the Ruby binaries
-ENV PATH $PATH:/opt/rubies/ruby-2.1.2/bin
-
 # Add Ruby binaries to $PATH
 RUN echo 'export PATH="$PATH:/opt/rubies/ruby-2.1.2/bin"' > /etc/profile.d/ruby.sh
 RUN chmod a+x /etc/profile.d/ruby.sh
+RUN echo '\nsource /etc/profile.d/ruby.sh' >> /etc/bash.bashrc
+
+# Adjust user gem settings
+RUN echo 'if (( $UID != 0 )); then\n\texport GEM_HOME="$HOME/.gems/2.1.2"\n\texport PATH="$PATH:$GEM_HOME/bin"\nfi' >> /etc/profile.d/ruby.sh
 
 # Never install Ruby docs
 RUN mkdir /opt/rubies/ruby-2.1.2/etc
