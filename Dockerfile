@@ -41,6 +41,7 @@ RUN make install
 RUN ruby-install ruby 2.1.2 -- --disable-install-doc
 
 # Add Ruby binaries to $PATH
+ENV PATH $PATH:/opt/rubies/ruby-2.1.2/bin
 RUN echo 'export PATH="$PATH:/opt/rubies/ruby-2.1.2/bin"' > /etc/profile.d/ruby.sh
 RUN chmod a+x /etc/profile.d/ruby.sh
 RUN echo '\nsource /etc/profile.d/ruby.sh' >> /etc/bash.bashrc
