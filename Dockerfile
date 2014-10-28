@@ -22,19 +22,19 @@ RUN apt-get -y install bison flex libreadline-dev libssl-dev libxml2-dev libxslt
 
 # Get ruby-install source
 WORKDIR /tmp
-RUN wget -O ruby-install-0.4.3.tar.gz \
-  https://github.com/postmodern/ruby-install/archive/v0.4.3.tar.gz
-RUN wget https://raw.github.com/postmodern/ruby-install/master/pkg/ruby-install-0.4.3.tar.gz.asc
+RUN wget -O ruby-install-0.5.0.tar.gz \
+  https://github.com/postmodern/ruby-install/archive/v0.5.0.tar.gz
+RUN wget https://raw.github.com/postmodern/ruby-install/master/pkg/ruby-install-0.5.0.tar.gz.asc
 
 # Verify it is ruby-install
 ADD ./postmodern.asc /tmp/postmodern.asc
 RUN gpg --no-default-keyring --import postmodern.asc
-RUN gpg --verify ruby-install-0.4.3.tar.gz.asc \
-  ruby-install-0.4.3.tar.gz
+RUN gpg --verify ruby-install-0.5.0.tar.gz.asc \
+  ruby-install-0.5.0.tar.gz
 
 # Install ruby-install
-RUN tar -xzvf ruby-install-0.4.3.tar.gz
-WORKDIR ruby-install-0.4.3/
+RUN tar -xzvf ruby-install-0.5.0.tar.gz
+WORKDIR ruby-install-0.5.0/
 RUN make install
 
 # Install actual Ruby
