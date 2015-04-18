@@ -1,4 +1,4 @@
-ruby_version: 2.1.5
+ruby_version: 2.1.6
 ruby_install_version: 0.5.0
 ruby_gems:
 - bundler
