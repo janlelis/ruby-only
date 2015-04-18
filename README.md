@@ -1,13 +1,10 @@
 # janlelis/ruby-only
 
-A docker base image that installs the latest Ruby via [ruby-install](https://github.com/postmodern/ruby-install).
+An ubuntu based docker image that installs the latest Ruby via [ruby-install](https://github.com/postmodern/ruby-install).
 
-Based on the [Ruby Dockerfile by Abe Voelker](https://github.com/abevoelker/docker-ruby).
+## Version Strategy
 
-Still tweaking around.
-
-MIT license.
-
+You can specify a Ruby version using it as a docker tag. It will lead to the respective branch on this repo. The branches will be updated, when the Dockerfile structure is changed. If you want to ensure that you will always get the very same Dockerfile, add "-fixed" to your docker tag, which will lead to git tags in this repo.
 
 ## Usage
 
@@ -23,3 +20,7 @@ You can build it with:
 And then run it with:
 
     docker run -it irb-image
+
+## MIT-License
+
+Originally based on the [Ruby Dockerfile by Abe Voelker](https://github.com/abevoelker/docker-ruby).
