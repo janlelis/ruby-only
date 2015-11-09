@@ -38,20 +38,20 @@ WORKDIR ruby-install-0.5.0/
 RUN make install
 
 # Install actual Ruby
-RUN ruby-install ruby 2.2.2 -- --disable-install-doc
+RUN ruby-install ruby 2.2.3 -- --disable-install-doc
 
 # Add Ruby binaries to $PATH
-ENV PATH $PATH:/opt/rubies/ruby-2.2.2/bin
-RUN echo 'export PATH="$PATH:/opt/rubies/ruby-2.2.2/bin"' > /etc/profile.d/ruby.sh
+ENV PATH $PATH:/opt/rubies/ruby-2.2.3/bin
+RUN echo 'export PATH="$PATH:/opt/rubies/ruby-2.2.3/bin"' > /etc/profile.d/ruby.sh
 RUN chmod a+x /etc/profile.d/ruby.sh
 RUN echo '\nsource /etc/profile.d/ruby.sh' >> /etc/bash.bashrc
 
 # Adjust user gem settings
-RUN echo 'if (( $UID != 0 )); then\n\texport GEM_HOME="$HOME/.gems/2.2.2"\n\texport PATH="$PATH:$GEM_HOME/bin"\nfi' >> /etc/profile.d/ruby.sh
+RUN echo 'if (( $UID != 0 )); then\n\texport GEM_HOME="$HOME/.gems/2.2.3"\n\texport PATH="$PATH:$GEM_HOME/bin"\nfi' >> /etc/profile.d/ruby.sh
 
 # Never install Ruby docs
-RUN mkdir /opt/rubies/ruby-2.2.2/etc
-RUN echo "gem: --no-document" > /opt/rubies/ruby-2.2.2/etc/gemrc
+RUN mkdir /opt/rubies/ruby-2.2.3/etc
+RUN echo "gem: --no-document" > /opt/rubies/ruby-2.2.3/etc/gemrc
 
 # Install global gems
 RUN /bin/bash -l -c 'gem install bundler'
